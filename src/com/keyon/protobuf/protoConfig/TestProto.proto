@@ -1,0 +1,49 @@
+// [头部声明]
+syntax = "proto3";
+package com.example.protobuf;
+import "google/protobuf/descriptor.proto";
+import "http.proto";
+// [Java选项配置]
+option java_package = "com.keyon.protobuf";
+option java_outer_classname = "ProtoTest";
+
+extend google.protobuf.FieldOptions {
+  // [扩展字段]
+  int32 over_write = 50001;
+  int32 database = 50002;
+}
+
+extend google.protobuf.MessageOptions {
+  // [扩展字段]
+  string hello = 50002;
+}
+
+message User {
+  uint32 id = 1;
+  string name = 2;
+}
+
+// [消息定义]
+message Msg {
+  uint32 id = 1;
+  string create_time = 2 [(over_write) = 0, (database) = 1];
+  string content = 3 [(over_write) = 1, (database) = 2];
+  string desc = 4 [deprecated = true];
+  User user = 5 [lazy = true];
+  repeated int32 arr = 6 [packed = true];
+  option (hello) = "Hello";
+  option deprecated = true;
+}
+
+extend google.protobuf.MethodOptions {
+  // See `HttpRule`.
+  google.api.HttpRule http = 72295728;
+}
+
+service SearchService {
+  rpc Search (Msg) returns (Msg) {
+    option (http) = {
+      get: "/v1/messages/{id}"
+    };
+  }
+}
