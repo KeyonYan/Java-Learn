@@ -48,7 +48,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <!-- 指定proto文件的路径 -->
-                    <protoSourceRoot>${project.basedir}/src/com/keyon/protobuf/protoConfig</protoSourceRoot>
+                    <protoSourceRoot>src/main/java/com/keyon/protobuf/protoConfig</protoSourceRoot>
                     <!-- 指定生成的java文件的路径 -->
                     <outputDirectory>${project.basedir}/src</outputDirectory>
                     <!-- 设置是否在生成Java文件之前清空outputDirectory目录 -->
