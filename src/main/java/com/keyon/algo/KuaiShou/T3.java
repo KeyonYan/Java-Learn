@@ -44,6 +44,7 @@ public class T3 {
                 double y = prev.y + delY;
                 markPoints.add(new Point(x, y));
                 prev = new Point(x, y);
+                i--;
             } else {
                 prev = curr;
             }
